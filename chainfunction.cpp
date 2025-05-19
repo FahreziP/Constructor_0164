@@ -1,26 +1,40 @@
 #include <iostream>
+#include <string>
 using namespace std;
 
-class buku
-{
+class Admin;
+
+class Buku {
+private:
     string judul;
+    string penulis;
+    bool dipinjam;
 
 public:
-    buku setJudul(string judul)
-    {
-        this->judul = judul;
-        return *this; // chain function
-    }
-    string getJudul()
-    {
-        return this->judul;
-    }
+    Buku(string j, string p) : judul(j), penulis(p), dipinjam(false) {}
+    friend class Petugas; 
 
-} bukunya;
+    friend void lihatStatus(Buku* b, Admin* a);
+};
 
-int main(){
-    // bukunya.setJudul("Matematika");
-    // cout << bukunya.getJudul();
-    cout << bukunya.setJudul("Matematika").getJudul(); // chain function calls
+class Peminjam {
+private:
+    string nama;
+    int id;
+    int totalPinjaman;
+
+public:
+    Peminjam(string n, int i) : nama(n), id(i), totalPinjaman(0) {}
+
+    friend class Petugas;
+
+    friend void lihatDataPeminjam(Peminjam* p, Admin* a);
+};
+
+int main()
+{
+    Buku.Judul("Matematika");
+    cout << Buku.getJudul();
+    cout << Buku.setJudul("Matematika").getJudul(); // chain function calls
     return 0;
 }
